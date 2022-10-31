@@ -4,14 +4,13 @@ const cors = require("cors");
 var indexRouter = require("./index");
 var usersRouter = require("./users");
 
-var apis = require("./a");
-var api;
+var apis = require("./apis");
 
 const routes = (app) => {
   app.use(cors());
   app.use("/", indexRouter);
   app.use("/users", usersRouter);
-  app.use("/a", apis);
+  app.use("/api", apis);
 };
 
 module.exports = routes;
