@@ -5,8 +5,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-const connectDB = require("./config/db.config.js");
-const routes = require("./routes/routes.js");
+const connectDB = require("./config/db.config");
+const routes = require("./routes/routes");
 
 // Connect Database
 connectDB();
