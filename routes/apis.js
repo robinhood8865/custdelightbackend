@@ -1,17 +1,17 @@
 const express = require("express");
 
-const authAPI = require("./../components/auth/authApi");
-// const widgetAPI = require("../components/widgets/widgetApi");
-// const widgetController = require("../components/widgets/widgetController");
+const authAPI = require("../components/auth/authApi");
+const widgetAPI = require("../components/widgets/widgetApi");
+const widgetController = require("../components/widgets/widgetController");
 
-// const auth = require("../middleware/auth");
-// const uploadIcon = require("../services/uploadIcon");
+const auth = require("../middleware/auth");
+const uploadIcon = require("../services/uploadIcon");
 
 const apis = express.Router();
 
 apis.use("/auth", authAPI);
-// apis.use("/widget", auth, widgetAPI);
-// apis.post("/subdomain", widgetController.findOneByDomain);
-// apis.use("/upload", uploadIcon);
+apis.use("/widget", auth, widgetAPI);
+apis.post("/subdomain", widgetController.findOneByDomain);
+apis.use("/upload", uploadIcon);
 
 module.exports = apis;
