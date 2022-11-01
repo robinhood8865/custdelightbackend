@@ -4,7 +4,7 @@ const apis = require("./apis");
 
 const routes = (app) => {
   app.use(cors());
-  app.use("api", apis);
+  app.use("/api", apis);
 };
 
 // var indexRouter = require("./index");
