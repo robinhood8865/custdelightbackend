@@ -1,12 +1,6 @@
 const userService = require("./userService");
-const widgetService = require("../widgets/widgetService");
 const widgetController = require("../widgets/widgetController");
 const { ERROR } = require("../../enum");
-const moduleController = require("../modules/moduleController");
-const membershipController = require("../memberships/membershipController");
-const voucherController = require("../vouchers/voucherController");
-const themeController = require("../themes/themeController");
-const settingController = require("../settings/settingController");
 
 const createUser = async (data) => {
   if (!data) {
@@ -46,40 +40,10 @@ const findOneByWidgetId = async (widgetId) => {
   return user;
 };
 
-const findOneBySettingId = async (settingId) => {
-  console.log("settingId", settingId);
-  const widget = widgetController.findOneBySettingId(settingId);
-  console.log(
-    "🚀 ~ file: userController.js ~ line 47 ~ findOneBySettingId ~ widget",
-    widget
-  );
-  const { _id, moduleId, themeId } = widget;
-  const user = userController.findOneByWidgetId(_id);
-  console.log(
-    "🚀 ~ file: userController.js ~ line 53 ~ findOneBySettingId ~ user",
-    user
-  );
-
-  // const module = moduleController.findOneById(moduleId);
-  // const { membershipId, voucherId } = module;
-  // const membership = membershipController.findOneById(membershipId);
-  // const voucher = voucherController.findOneById(voucherId);
-  // const theme = themeController.findOneById(themeId);
-  // const setting = settingController.findOneById(settingId);
-  // const widgetData = {
-  //   module: { membership, voucher },
-  //   theme: theme,
-  //   setting: setting,
-  // };
-  // const data = { data: widgetData, user: user };
-  // return data;
-};
-
 const userController = {
   createUser,
   findOneByFilter,
   findOneByWidgetId,
-  findOneBySettingId,
 };
 
 module.exports = userController;
