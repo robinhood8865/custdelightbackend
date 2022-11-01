@@ -1,6 +1,7 @@
 const express = require("express");
 
-// const authAPI = require("../components/auth/authApi");
+const authAPI = require("../components/auth/authAPI");
+
 // const widgetAPI = require("../components/widgets/widgetApi");
 // const widgetController = require("../components/widgets/widgetController");
 
@@ -9,7 +10,7 @@ const express = require("express");
 
 const apis = express.Router();
 
-// apis.use("/auth", authAPI);
+apis.use("/auth", authAPI);
 // apis.use("/widget", auth, widgetAPI);
 // apis.post("/subdomain", widgetController.findOneByDomain);
 // apis.use("/upload", uploadIcon);
