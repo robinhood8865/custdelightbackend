@@ -1,17 +1,17 @@
-const memberShipService = require("./memberShipService");
+const membershipService = require("./membershipService");
 
 const createMembership = async () => {
-  const membership = await memberShipService.createMembership({});
+  const membership = await membershipService.createMembership({});
   return membership;
 };
 
 const updateMembershipById = async (id, data) => {
-  const membership = await memberShipService.updateMembershipById(id, data);
+  const membership = await membershipService.updateMembershipById(id, data);
   return membership;
 };
 
 const findOneById = async (id) => {
-  const membership = await memberShipService.findOneById(id);
+  const membership = await membershipService.findOneById(id);
   return membership;
 };
 
