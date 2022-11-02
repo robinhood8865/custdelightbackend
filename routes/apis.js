@@ -2,7 +2,7 @@ const express = require("express");
 
 const authAPI = require("../components/auth/authAPI");
 
-const widgetAPI = require("../components/widgets/widgetApi");
+const widgetAPI = require("../components/widgets/widgetAPI");
 const widgetController = require("../components/widgets/widgetController");
 
 const auth = require("../middleware/auth");
