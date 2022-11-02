@@ -1,4 +1,4 @@
-const Voucher = require("./VoucherDal");
+const Voucher = require("./voucherDal");
 
 const createVoucher = async (data) => {
   const voucher = new Voucher(data);
