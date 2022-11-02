@@ -2,11 +2,11 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const userService = require("../users/userService");
 const userController = require("../users/userController");
-const bcrypt = require("bcryptjs");
-const { ERROR } = require("../../enum");
+// const bcrypt = require("bcryptjs");
+// const { ERROR } = require("../../enum");
 
-const { check, validationResult } = require("express-validator");
-const widgetController = require("../widgets/widgetController");
+// const { check, validationResult } = require("express-validator");
+// const widgetController = require("../widgets/widgetController");
 
 const signin = async (req, res) => {
   // const { email, password } = req.body;
