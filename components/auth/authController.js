@@ -1,6 +1,6 @@
-// const jwt = require("jsonwebtoken");
-// const config = require("config");
-// const userService = require("../users/userService");
+const jwt = require("jsonwebtoken");
+const config = require("config");
+const userService = require("../users/userService");
 // const userController = require("../users/userController");
 // const bcrypt = require("bcryptjs");
 // const { ERROR } = require("../../enum");
