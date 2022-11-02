@@ -30,8 +30,13 @@ const updateWidget = async (req, res) => {
     "🚀 ~ file: widgetController.js ~ line 25 ~ updateWidget ~ widget",
     widget
   );
+
   const { module, theme, setting } = widget;
   const { membership, voucher, ...temp } = module;
+  console.log(
+    "🚀 ~ file: widgetController.js ~ line 36 ~ updateWidget ~ voucher",
+    voucher
+  );
   const widgetdata = await findOneById(widgetId);
   const { moduleId, themeId, settingId } = widgetdata;
   const moduledata = await moduleController.findOneById(moduleId);
@@ -66,8 +71,7 @@ const updateWidget = async (req, res) => {
     theme: updatedTheme,
     setting: updatedSetting,
   };
-
-  res.json(updatedwidget);
+  res.json("success updated");
 };
 
 const findOneById = async (filter) => {

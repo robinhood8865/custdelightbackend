@@ -3,15 +3,14 @@ const widgetController = require("../widgets/widgetController");
 const { ERROR } = require("../../enum");
 
 const createUser = async (data) => {
-  if (!data) {
-    console.log(ERROR.NO_DATA);
-    return ERROR.NO_DATA;
-  }
-  const isNew = await userService.isNewUser(data);
-  if (!isNew) {
-    console.log(ERROR.USER_EXIST);
-    return ERROR.USER_EXIST;
-  }
+  // if (!data) {
+  //   console.log(ERROR.NO_DATA);
+  //   return ERROR.NO_DATA;
+  // }
+  // const isNew = await userService.isNewUser(data);
+  // if (!isNew) {
+  //   return ERROR.USER_EXIST;
+  // }
   const widget = await widgetController.createWidget({});
   const user = await userService.createUser({
     ...data,
