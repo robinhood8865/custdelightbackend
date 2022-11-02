@@ -1,6 +1,6 @@
 const widgetService = require("./widgetService");
 const moduleController = require("../modules/moduleController");
-// const membershipController = require("../memberships/membershipController");
+const membershipController = require("../memberships/membershipController");
 const voucherController = require("../vouchers/voucherController");
 const settingController = require("../settings/settingController");
 const themeController = require("../themes/themeController");
