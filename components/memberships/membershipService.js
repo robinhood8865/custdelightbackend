@@ -16,10 +16,10 @@ const findOneById = async (id) => {
   return membership;
 };
 
-const membershipServcie = {
+const memberShipService = {
   createMembership,
   findOneById,
   updateMembershipById,
 };
 
-module.exports = membershipServcie;
+module.exports = memberShipService;
