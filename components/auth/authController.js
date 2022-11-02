@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const { ERROR } = require("../../enum");
 
 const { check, validationResult } = require("express-validator");
-// const widgetController = require("../widgets/widgetController");
+const widgetController = require("../widgets/widgetController");
 
 const signin = async (req, res) => {
   // const { email, password } = req.body;
