@@ -25,25 +25,25 @@ const createUser = async (data) => {
   return user;
 };
 
-const findOneByFilter = async (filter) => {
-  const data = await userService.findOneByFilter(filter);
-  return data;
-};
+// const findOneByFilter = async (filter) => {
+//   const data = await userService.findOneByFilter(filter);
+//   return data;
+// };
 
-const findOneByWidgetId = async (widgetId) => {
-  console.log(
-    "🚀 ~ file: userController.js ~ line 40 ~ findOneByWidgetId ~ widgetId",
-    widgetId
-  );
+// const findOneByWidgetId = async (widgetId) => {
+//   console.log(
+//     "🚀 ~ file: userController.js ~ line 40 ~ findOneByWidgetId ~ widgetId",
+//     widgetId
+//   );
 
-  const user = userService.findOneByWidgetId(widgetId);
-  return user;
-};
+//   const user = userService.findOneByWidgetId(widgetId);
+//   return user;
+// };
 
 const userController = {
   createUser,
-  findOneByFilter,
-  findOneByWidgetId,
+  // findOneByFilter,
+  // findOneByWidgetId,
 };
 
 module.exports = userController;
