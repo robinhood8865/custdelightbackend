@@ -13,10 +13,13 @@ const signin = async (req, res) => {
   try {
     let user = await userService.findOneByFilter({ email });
     if (!user) {
+      console.log("Unregistered ");
       return res.status(400).json({ errors: [{ msg: "Unregistered email!" }] });
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
+      console.log("password not correct ");
+
       return res
         .status(400)
         .json({ errors: [{ msg: "Password not correct!" }] });
