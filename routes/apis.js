@@ -1,4 +1,6 @@
 const express = require("express");
+const airtableAPI = require("../components/airtable/airtableApi");
+const airtableController = require("../components/airtable/airtableController");
 
 const authAPI = require("../components/auth/authAPI");
 
@@ -14,5 +16,7 @@ apis.use("/auth", authAPI);
 apis.use("/widget", auth, widgetAPI);
 apis.post("/subdomain", widgetController.findOneByDomain);
 apis.use("/upload", uploadIcon);
+apis.use("/updateapikey", airtableController.updateAirtableById);
+apis.use("/airtableApi", airtableAPI);
 
 module.exports = apis;

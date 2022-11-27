@@ -9,6 +9,7 @@ const { check, validationResult } = require("express-validator");
 const widgetController = require("../widgets/widgetController");
 
 const signin = async (req, res) => {
+  console.log("signin");
   const { email, password } = req.body;
   try {
     let user = await userService.findOneByFilter({ email });

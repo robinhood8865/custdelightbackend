@@ -9,15 +9,18 @@ const path = require("path");
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+const airtableController = require("../airtable/airtableController");
 
 const createWidget = async () => {
   const module = await moduleController.createModule({});
   const setting = await settingController.createSetting({});
   const theme = await themeController.createTheme({});
+  const airtable = await airtableController.createAirtable({});
   const widget = await widgetService.createWidget({
     moduleId: module._id,
     themeId: theme._id,
     settingId: setting._id,
+    airtableId: airtable._id,
   });
 
   return widget;
@@ -31,14 +34,14 @@ const updateWidget = async (req, res) => {
     widget
   );
 
-  const { module, theme, setting } = widget;
+  const { module, theme, setting, integration } = widget;
   const { membership, voucher, ...temp } = module;
   console.log(
     "🚀 ~ file: widgetController.js ~ line 36 ~ updateWidget ~ voucher",
     voucher
   );
   const widgetdata = await findOneById(widgetId);
-  const { moduleId, themeId, settingId } = widgetdata;
+  const { moduleId, themeId, settingId, airtableId } = widgetdata;
   const moduledata = await moduleController.findOneById(moduleId);
   const { membershipId, voucherId } = moduledata;
   const updatedMembership = await membershipController.updateMembershipById(
@@ -66,10 +69,16 @@ const updateWidget = async (req, res) => {
     setting
   );
 
+  const updatedAirtable = await airtableController.updateAirtableById(
+    airtableId,
+    integration
+  );
+
   const updatedwidget = {
     module: updatedModule,
     theme: updatedTheme,
     setting: updatedSetting,
+    integration: updatedAirtable,
   };
   res.json("success updated");
 };

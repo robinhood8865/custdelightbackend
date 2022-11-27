@@ -3,6 +3,7 @@ const moduleController = require("../modules/moduleController");
 const settingController = require("../settings/settingController");
 const Setting = require("../settings/settingDal");
 const themeController = require("../themes/themeController");
+const airtableController = require("../airtable/airtableController");
 const voucherController = require("../vouchers/voucherController");
 const Widget = require("./widgetDal");
 
@@ -25,7 +26,7 @@ const findOneBySettingId = async (settingId) => {
 const readWidgetAllData = async (widgetId) => {
   const widget = await Widget.findById(widgetId);
 
-  const { moduleId, themeId, settingId } = widget;
+  const { moduleId, themeId, settingId, airtableId } = widget;
   const module = await moduleController.findOneById(moduleId);
   console.log(
     "🚀 ~ file: widgetService.js ~ line 30 ~ readWidgetAllData ~ module",
@@ -33,6 +34,7 @@ const readWidgetAllData = async (widgetId) => {
   );
   const theme = await themeController.findOneById(themeId);
   const setting = await settingController.findOneById(settingId);
+  const airtable = await airtableController.findOneById(airtableId);
 
   if (setting === "error") return "error";
 
@@ -40,6 +42,7 @@ const readWidgetAllData = async (widgetId) => {
     module,
     theme,
     setting,
+    airtable,
   };
 
   return data;

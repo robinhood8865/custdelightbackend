@@ -7,6 +7,8 @@ const widgetSchema = new mongoose.Schema(
     moduleId: ObjectId,
     themeId: ObjectId,
     settingId: ObjectId,
+    airtableId: ObjectId,
+    integrationId: ObjectId,
   },
   {
     timestamps: true,
@@ -30,6 +32,12 @@ widgetSchema.virtual("theme", {
 widgetSchema.virtual("setting", {
   ref: "Setting",
   localField: "settingId",
+  foreignField: "_id",
+});
+
+widgetSchema.virtual("airtable", {
+  ref: "Aritable",
+  localField: "airtableId",
   foreignField: "_id",
 });
 
