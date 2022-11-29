@@ -6,6 +6,6 @@ const widgetAPI = express.Router();
 widgetAPI.post("/", widgetController.updateWidget);
 widgetAPI.get("/", widgetController.readWidget);
 widgetAPI.post("/uploadicon", widgetController.uploadIcon);
-widgetAPI.post("/updateapikey", )
+widgetAPI.post("/updateapikey");
 
 module.exports = widgetAPI;
