@@ -1,4 +1,4 @@
-const Airtable = require("./AirtableDal");
+const Airtable = require("./airtableDal");
 
 const createAirtable = async (data) => {
   const airtable = new Airtable(data);
