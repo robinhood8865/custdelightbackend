@@ -1,5 +1,5 @@
 const express = require("express");
-const airtableAPI = require("../components/integration/airtableApi");
+const airtableAPI = require("../components/integration/airtableAPI");
 const integrationController = require("../components/integration/integrationController");
 
 const authAPI = require("../components/auth/authAPI");
