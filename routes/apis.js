@@ -3,7 +3,7 @@ const airtableAPI = require("../components/airtable/airtableApi");
 const airtableController = require("../components/airtable/airtableController");
 
 const authAPI = require("../components/auth/authAPI");
-const stripeAPI = require("../components/stripe/stripeAPI");
+// const stripeAPI = require("../components/stripe/stripeAPI");
 
 const widgetAPI = require("../components/widgets/widgetAPI");
 const widgetController = require("../components/widgets/widgetController");
@@ -19,6 +19,6 @@ apis.post("/subdomain", widgetController.findOneByDomain);
 apis.use("/upload", uploadIcon);
 apis.use("/updateapikey", airtableController.updateAirtableById);
 apis.use("/airtableApi", airtableAPI);
-apis.use("/stripeApi", stripeAPI);
+// apis.use("/stripeApi", stripeAPI);
 
 module.exports = apis;

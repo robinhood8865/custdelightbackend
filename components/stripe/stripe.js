@@ -35,11 +35,9 @@ const deleteProduct = async (id) => {
   return deleted;
 };
 
-const stripe = {
+module.exports = {
   addNewCustomer,
   getCustomerById,
   getCustomerByEmail,
   addNewProduct,
 };
-
-module.exports = stripe;
