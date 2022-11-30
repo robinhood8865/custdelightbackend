@@ -7,7 +7,6 @@ const widgetSchema = new mongoose.Schema(
     moduleId: ObjectId,
     themeId: ObjectId,
     settingId: ObjectId,
-    airtableId: ObjectId,
     integrationId: ObjectId,
   },
   {
@@ -35,9 +34,9 @@ widgetSchema.virtual("setting", {
   foreignField: "_id",
 });
 
-widgetSchema.virtual("airtable", {
-  ref: "Aritable",
-  localField: "airtableId",
+widgetSchema.virtual("integration", {
+  ref: "Integration",
+  localField: "integrationId",
   foreignField: "_id",
 });
 

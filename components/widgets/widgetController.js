@@ -9,18 +9,18 @@ const path = require("path");
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const airtableController = require("../airtable/airtableController");
+const integrationController = require("../integration/integrationController");
 
 const createWidget = async () => {
   const module = await moduleController.createModule({});
   const setting = await settingController.createSetting({});
   const theme = await themeController.createTheme({});
-  const airtable = await airtableController.createAirtable({});
+  const integration = await integrationController.createIntegration({});
   const widget = await widgetService.createWidget({
     moduleId: module._id,
     themeId: theme._id,
     settingId: setting._id,
-    airtableId: airtable._id,
+    integrationId: integration._id,
   });
 
   return widget;
@@ -29,19 +29,11 @@ const createWidget = async () => {
 const updateWidget = async (req, res) => {
   const widgetId = req.body.widgetId;
   const widget = req.body.widget;
-  console.log(
-    "🚀 ~ file: widgetController.js ~ line 25 ~ updateWidget ~ widget",
-    widget
-  );
 
   const { module, theme, setting, integration } = widget;
   const { membership, voucher, ...temp } = module;
-  console.log(
-    "🚀 ~ file: widgetController.js ~ line 36 ~ updateWidget ~ voucher",
-    voucher
-  );
   const widgetdata = await findOneById(widgetId);
-  const { moduleId, themeId, settingId, airtableId } = widgetdata;
+  const { moduleId, themeId, settingId, integrationId } = widgetdata;
   const moduledata = await moduleController.findOneById(moduleId);
   const { membershipId, voucherId } = moduledata;
   const updatedMembership = await membershipController.updateMembershipById(
@@ -69,8 +61,8 @@ const updateWidget = async (req, res) => {
     setting
   );
 
-  const updatedAirtable = await airtableController.updateAirtableById(
-    airtableId,
+  const updatedIntegration = await integrationController.updateIntegrationById(
+    integrationId,
     integration
   );
 
@@ -78,7 +70,7 @@ const updateWidget = async (req, res) => {
     module: updatedModule,
     theme: updatedTheme,
     setting: updatedSetting,
-    integration: updatedAirtable,
+    integration: updatedIntegration,
   };
   res.json("success updated");
 };

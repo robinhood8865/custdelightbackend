@@ -1,9 +1,9 @@
 const express = require("express");
-const airtableAPI = require("../components/airtable/airtableApi");
-const airtableController = require("../components/airtable/airtableController");
+const airtableAPI = require("../components/integration/airtableApi");
+const integrationController = require("../components/integration/integrationController");
 
 const authAPI = require("../components/auth/authAPI");
-// const stripeAPI = require("../components/stripe/stripeAPI");
+const stripeAPI = require("../components/integration/stripeAPI");
 
 const widgetAPI = require("../components/widgets/widgetAPI");
 const widgetController = require("../components/widgets/widgetController");
@@ -17,8 +17,8 @@ apis.use("/auth", authAPI);
 apis.use("/widget", auth, widgetAPI);
 apis.post("/subdomain", widgetController.findOneByDomain);
 apis.use("/upload", uploadIcon);
-apis.use("/updateapikey", airtableController.updateAirtableById);
+apis.use("/updateapikey", integrationController.updateIntegrationById);
 apis.use("/airtableApi", airtableAPI);
-// apis.use("/stripeApi", stripeAPI);
+apis.use("/stripeApi", stripeAPI);
 
 module.exports = apis;
