@@ -3,11 +3,16 @@ const STRIPE_SECRET_KEY = process.env.PLAN_STRIPE_SECRET_KEY;
 
 const Stripe = stripe(STRIPE_SECRET_KEY, { apiVersion: "2022-11-15" });
 
-const addNewCustomer = async (email) => {
-  const customer = await Stripe.create({
+const addNewCustomer = async (req) => {
+  const { email, paymentMethodId } = req.body;
+  const customer = await Stripe.customers.create({
     email,
     description: "New Customer",
   });
+  await Stripe.paymentMethods.attach(paymentMethodId, {
+    customer: customer.id,
+  });
+  await Stripe.payments.create();
   return customer;
 };
 
@@ -23,15 +28,51 @@ const getCustomerByEmail = async (email) => {
   return customer;
 };
 
-const addNewProduct = async (name) => {
-  const product = await Stripe.product.create({
-    name: name,
+const addNewProduct = async (voucher) => {
+  const {
+    voucherTitle,
+    voucherType,
+    voucherUsualPrice,
+    voucherDiscountedPrice,
+    voucherTerms,
+  } = voucher;
+
+  const product = await Stripe.products.create({
+    name: voucherTitle,
+    default_price_data: {
+      unit_amount:
+        voucherDiscountedPrice > 0
+          ? voucherDiscountedPrice * 100
+          : voucherUsualPrice * 100,
+      currency: "usd",
+    },
+    expand: ["default_price"],
   });
-  return product;
+
+  return product.id;
+};
+
+const updateProduct = async (voucher) => {
+  const {
+    voucherTitle,
+    voucherType,
+    voucherUsualPrice,
+    voucherDiscountedPrice,
+    voucherTerms,
+    voucherProdId,
+  } = voucher;
+
+  const product = await stripe.products.retrieve(voucherProdId);
+  if (!product) {
+    await stripe.products.update(voucherProdId, {
+      name: voucherTitle,
+    });
+  }
 };
 
 const deleteProduct = async (id) => {
-  const deleted = await Stripe.product.del(id);
+  console.log("delete");
+  const deleted = await Stripe.products.del(`{{prod_N35FsnHbjCW9Em}}`);
   return deleted;
 };
 
@@ -45,6 +86,7 @@ const addVoucher = async (req, res) => {
 
 module.exports = {
   addNewCustomer,
+  deleteProduct,
   getCustomerById,
   getCustomerByEmail,
   addNewProduct,

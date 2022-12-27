@@ -1,3 +1,5 @@
+const stripe = require("../integration/stripe");
+
 const widgetService = require("./widgetService");
 const moduleController = require("../modules/moduleController");
 const membershipController = require("../memberships/membershipController");
@@ -32,6 +34,11 @@ const updateWidget = async (req, res) => {
 
   const { module, theme, setting, integration } = widget;
   const { membership, voucher, ...temp } = module;
+  console.log(
+    "🚀 ~ file: widgetController.js:59 ~ updateWidget ~ voucher",
+    voucher
+  );
+  const { vouchers, ...tempVoucher } = voucher;
   const widgetdata = await findOneById(widgetId);
   const { moduleId, themeId, settingId, integrationId } = widgetdata;
   const moduledata = await moduleController.findOneById(moduleId);
@@ -40,10 +47,40 @@ const updateWidget = async (req, res) => {
     membershipId,
     membership
   );
+
+  for (let i = 0; i < vouchers.length; i++) {
+    if (vouchers[i].flag == 0) {
+      //none action
+    }
+    if (vouchers[i].voucherFlag == 1) {
+      console.log(
+        "🚀 ~ file: widgetController.js:56 ~ updateWidget ~ vouchers[i]",
+        vouchers[i]
+      );
+
+      //create voucher
+      const prodId = await stripe.addNewProduct(vouchers[i]);
+      console.log(
+        "🚀 ~ file: widgetController.js:63 ~ updateWidget ~ prodId",
+        prodId
+      );
+      vouchers[i].voucherProdId = prodId;
+    }
+    if (vouchers[i].flag == 2) {
+      //modify voucher
+    }
+    if (vouchers[i].flag == 3) {
+      //delete voucher
+    }
+  }
+
+  console.log("new Voucher", voucher);
+
   const updatedVoucher = await voucherController.updateVoucherById(
     voucherId,
     voucher
   );
+
   const tempModuleData = {
     ...temp,
     membershipId,
@@ -66,13 +103,15 @@ const updateWidget = async (req, res) => {
     integration
   );
 
+  const newVoucher = await voucherController.findOneById(voucherId);
+
   const updatedwidget = {
-    module: updatedModule,
-    theme: updatedTheme,
-    setting: updatedSetting,
-    integration: updatedIntegration,
+    module: { ...module, voucher: newVoucher },
+    theme,
+    setting,
+    integration,
   };
-  res.json("success updated");
+  res.json(updatedwidget);
 };
 
 const findOneById = async (filter) => {
@@ -121,14 +160,15 @@ const findOneBySettingId = async (settingId) => {
   return widget;
 };
 
-const readWidget = async (widgetId) => {
+const readWidget = async (req, res) => {
   console.log("widgetController widgetId", widgetId);
+  const { widgetId } = req.body.widgetId;
   const widget = await widgetService.readWidgetAllData(widgetId);
   console.log(
     "🚀 ~ file: widgetController.js ~ line 95 ~ readWidget ~ widget",
     widget
   );
-  return widget;
+  res.send(widget);
 };
 
 const uploadIcon = async (req, res) => {

@@ -19,10 +19,6 @@ const createModule = async (data) => {
 
 const findOneById = async (id) => {
   const modules = await moduleService.findOneById(id);
-  console.log(
-    "🚀 ~ file: moduleController.js ~ line 22 ~ findOneById ~ modules",
-    modules
-  );
   return modules;
 };
 

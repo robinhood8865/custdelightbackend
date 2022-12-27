@@ -1,9 +1,13 @@
 const Airtable = require("airtable");
 const { check, validationResult } = require("express-validator");
+const API_KEY = process.env.AIR_TABLE_API_KEY;
+const BASE_ID = process.env.AIR_TABLE_BASE_ID;
 
-var base = new Airtable({ apiKey: "keydAtrtMYXMl1eV2" }).base(
-  "appFgsnjRRLox23zr"
-);
+// var base = new Airtable({ apiKey: "keyZo3Y0Rrb662fzT" }).base(
+//   "appFgsnjRRLox23zr"
+// );
+
+var base = new Airtable({ apiKey: API_KEY }).base(BASE_ID);
 
 const userTableName = "User";
 const userTable = base(userTableName);
@@ -72,6 +76,7 @@ const getData = async (email) => {
       filterByFormula: `{email} = "${email}"`,
     })
     .all();
+  console.log(records);
   return records;
 };
 
@@ -98,6 +103,7 @@ const login = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
   const { email, password } = req.body;
+  console.log(email, password);
 
   const fields = { email, password };
   const user = await matchData(fields);
