@@ -160,15 +160,13 @@ const findOneBySettingId = async (settingId) => {
   return widget;
 };
 
-const readWidget = async (req, res) => {
-  console.log("widgetController widgetId", widgetId);
-  const { widgetId } = req.body.widgetId;
+const readWidget = async (widgetId) => {
   const widget = await widgetService.readWidgetAllData(widgetId);
   console.log(
     "🚀 ~ file: widgetController.js ~ line 95 ~ readWidget ~ widget",
     widget
   );
-  res.send(widget);
+  return widget;
 };
 
 const uploadIcon = async (req, res) => {

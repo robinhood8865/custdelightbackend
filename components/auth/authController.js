@@ -11,6 +11,11 @@ const widgetController = require("../widgets/widgetController");
 const signin = async (req, res) => {
   console.log("signin");
   const { email, password } = req.body;
+  console.log(
+    "🚀 ~ file: authController.js:14 ~ signin ~ email, password",
+    email,
+    password
+  );
   try {
     let user = await userService.findOneByFilter({ email });
     if (!user) {
