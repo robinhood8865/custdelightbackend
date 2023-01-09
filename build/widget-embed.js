@@ -4,7 +4,7 @@ cssFile.href = "./widget/index.css";
 document.head.appendChild(cssFile);
 
 var elem = document.createElement("div");
-elem.id = "root";
+elem.id = "widgetroot";
 console.log(elem);
 document.body.appendChild(elem);
 
@@ -13,9 +13,9 @@ jsFile1.type = "text/javascript";
 jsFile1.src = "./widget/index.js";
 document.body.appendChild(jsFile1);
 
-var currentURL = window.location.href;
-var splits = currentURL.split("/");
-var domain = console.log(splits[2]);
+// var currentURL = window.location.href;
+// var splits = currentURL.split("/");
+// var domain = console.log(splits[2]);
 
 // var apiURL = "https://192.168.112.159:5000/api";
 // fetch(apiURL, {
