@@ -3,6 +3,20 @@ const STRIPE_SECRET_KEY = process.env.PLAN_STRIPE_SECRET_KEY;
 
 const Stripe = stripe(STRIPE_SECRET_KEY, { apiVersion: "2022-11-15" });
 
+const getClientSecret = async (req, res) => {
+  const { amount, currency, metaData } = req.body;
+
+  console.log("getClientSecret");
+  console.log(amount, currency, metaData);
+  if (amount === 0) return;
+  const intent = await Stripe.paymentIntents.create({
+    amount: amount,
+    currency: currency,
+    metadata: metaData,
+    payment_method_types: ["card"],
+  });
+  res.json({ clientSecret: intent.client_secret });
+};
 const addNewCustomer = async (req) => {
   const { email, paymentMethodId } = req.body;
   const customer = await Stripe.customers.create({
@@ -92,4 +106,5 @@ module.exports = {
   addNewProduct,
   checkout,
   addVoucher,
+  getClientSecret,
 };

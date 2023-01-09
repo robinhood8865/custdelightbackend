@@ -48,33 +48,31 @@ const updateWidget = async (req, res) => {
     membership
   );
 
-  for (let i = 0; i < vouchers.length; i++) {
-    if (vouchers[i].flag == 0) {
-      //none action
-    }
-    if (vouchers[i].voucherFlag == 1) {
-      console.log(
-        "🚀 ~ file: widgetController.js:56 ~ updateWidget ~ vouchers[i]",
-        vouchers[i]
-      );
+  // for (let i = 0; i < vouchers.length; i++) {
+  //   if (vouchers[i].flag == 0) {
+  //     //none action
+  //   }
+  //   if (vouchers[i].voucherFlag == 1) {
+  //     console.log(
+  //       "🚀 ~ file: widgetController.js:56 ~ updateWidget ~ vouchers[i]",
+  //       vouchers[i]
+  //     );
 
-      //create voucher
-      const prodId = await stripe.addNewProduct(vouchers[i]);
-      console.log(
-        "🚀 ~ file: widgetController.js:63 ~ updateWidget ~ prodId",
-        prodId
-      );
-      vouchers[i].voucherProdId = prodId;
-    }
-    if (vouchers[i].flag == 2) {
-      //modify voucher
-    }
-    if (vouchers[i].flag == 3) {
-      //delete voucher
-    }
-  }
-
-  console.log("new Voucher", voucher);
+  //     //create voucher
+  //     const prodId = await stripe.addNewProduct(vouchers[i]);
+  //     console.log(
+  //       "🚀 ~ file: widgetController.js:63 ~ updateWidget ~ prodId",
+  //       prodId
+  //     );
+  //     vouchers[i].voucherProdId = prodId;
+  //   }
+  //   if (vouchers[i].flag == 2) {
+  //     //modify voucher
+  //   }
+  //   if (vouchers[i].flag == 3) {
+  //     //delete voucher
+  //   }
+  // }
 
   const updatedVoucher = await voucherController.updateVoucherById(
     voucherId,
